@@ -1,0 +1,15 @@
+module muxtest;
+	reg[7:0] A; reg[2:0] S; wire F;
+	mux8to1 M(.in(A),.sel(S),.out(F));
+	initial
+		begin
+			$dumpfile("mux8to1.vcd");
+			$dumpvars(0,muxtest);
+			$monitor($time,"A=%d,S=%d,F=%b",A,S,F);
+			#5 A=8'd30;S=4'h0;
+			#5 S=4'd1;
+			#5 S=4'd6;
+			#5 S=4'd8;
+			#5 $finish;
+		end
+endmodule
